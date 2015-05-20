@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+
+{% macro feature(name, progress="not-started", indent=False, comments=None) -%}
+<tr {% if comments %}title="{{ comments }}"{% endif %}>
+    {% if indent %}
+    <td style="padding-left: 50px;">
+    {% else %}
+    <td>
+    {% endif %}
+        {{ name }}
+    </td>
+    {% if progress == "done" %}
+    <td class="success">Complete</td>
+    {% elif progress == "in-progress" %}
+    <td class="warning">In progress</td>
+    {% elif progress == "meta" %}
+    <td></td>
+    {% else %}
+    <td class="danger">Not started</td>
+    {% endif %}
+</tr>
+
+{%- endmacro %}
+
+{% block body %}
+<p>Some features that are in-progress will give more details when hovered over.</p>
+
+<h1>Server</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Progress</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ feature("Beta 1.7.3 networking", "done") }}
+        {{ feature("MCRegion worlds", "done") }}
+            {{ feature("Tile entities", "done", indent=True) }}
+            {{ feature("Multiworld", "not-started", indent=True) }}
+            {{ feature("Player metadata", "done", indent=True) }}
+        {{ feature("Entities", "meta") }}
+            {{ feature("Physics", "done", indent=True) }}
+            {{ feature("Item entities", "done", indent=True) }}
+            {{ feature("Falling blocks", "done", indent=True) }}
+            {{ feature("Players", "done", indent=True) }}
+            {{ feature("Mobs", "not-started", indent=True) }}
+            {{ feature("Minecarts", "not-started", indent=True) }}
+            {{ feature("Boats", "not-started", indent=True) }}
+        {{ feature("AI", "not-started") }}
+        {{ feature("Terrain generation", "done") }}
+            {{ feature("Perlin base terrain", "done", indent=True) }}
+            {{ feature("Biomes", "done", indent=True) }}
+            {{ feature("Caves", "done", indent=True) }}
+            {{ feature("Decorators", "done", indent=True) }}
+        {{ feature("Window management", "meta") }}
+            {{ feature("Inventory", "done", indent=True) }}
+            {{ feature("Crafting", "done", indent=True) }}
+            {{ feature("Furnaces", "not-started", indent=True) }}
+            {{ feature("Chests", "not-started", indent=True) }}
+        {{ feature("Modding API", "not-started") }}
+        {{ feature("Game logic", "meta") }}
+            {{ feature("Farming", "in-progress", indent=True, comments="Wheat and sugarcane are done") }}
+            {{ feature("Doors", "done", indent=True) }}
+            {{ feature("Unusual item drops", "in-progress", indent=True, comments="For example, snow drops snowballs instead of snow blocks") }}
+            {{ feature("Block updates", "done", indent=True) }}
+            {{ feature("Fluid simulation", "done", indent=True) }}
+            {{ feature("Portals", "not-started", indent=True) }}
+            {{ feature("Signs", "done", indent=True) }}
+            {{ feature("Trees", "in-progress", indent=True, comments="Generation is done but not hooked up to saplings") }}
+            {{ feature("TNT", "not-started", indent=True) }}
+            {{ feature("Redstone", "not-started", indent=True) }}
+            {{ feature("Bonemeal", "not-started", indent=True) }}
+            {{ feature("Fishing", "not-started", indent=True) }}
+            {{ feature("Fire", "not-started", indent=True) }}
+            {{ feature("Jukeboxes", "not-started", indent=True) }}
+            {{ feature("Beds", "in-progress", indent=True, comments="Placement is done, sleeping is not") }}
+            {{ feature("Directional blocks", "in-progress", indent=True, comments="Refers to things like ladders and dispensers, that face a certain direction") }}
+        {{ feature("Lighting", "not-started") }}
+        {{ feature("Weather", "not-started") }}
+        {{ feature("Combat", "not-started") }}
+        {{ feature("Food", "not-started") }}
+    </tbody>
+</table>
+
+<h1>Client</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Progress</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ feature("Launcher", "in-progress") }}
+        {{ feature("Beta 1.7.3 networking", "done") }}
+        {{ feature("World decoding", "done") }}
+        {{ feature("Chat", "in-progress") }}
+        {{ feature("Window management", "not-started") }}
+        {{ feature("World interaction", "not-started") }}
+        {{ feature("Combat", "not-started") }}
+        {{ feature("Particles", "not-started") }}
+        {{ feature("Input", "meta") }}
+            {{ feature("Movement and look", "done", indent=True) }}
+            {{ feature("Custom key bindings", "not-started", indent=True) }}
+        {{ feature("Rendering terrain", "meta") }}
+            {{ feature("Basic support", "done", indent=True) }}
+            {{ feature("Blocks w/special textures", "in-progress", indent=True) }}
+            {{ feature("Blocks w/special models", "in-progress", indent=True) }}
+        {{ feature("Rendering entities", "meta") }}
+            {{ feature("Players", "not-started", indent=True) }}
+            {{ feature("Item entities", "not-started", indent=True) }}
+            {{ feature("Falling blocks", "not-started", indent=True) }}
+            {{ feature("Mobs", "not-started", indent=True) }}
+            {{ feature("Minecarts", "not-started", indent=True) }}
+            {{ feature("Boats", "not-started", indent=True) }}
+    </tbody>
+</table>
+
+<h1>Auth Servers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Progress</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ feature("Website", "in-progress") }}
+            {{ feature("User registration", "done", indent=True) }}
+            {{ feature("Content", "in-progress", indent=True) }}
+            {{ feature("Updates feed", "in-progress", indent=True) }}
+        {{ feature("Authentication API", "in-progress") }}
+    </tbody>
+</table>
+
+{% endblock %}

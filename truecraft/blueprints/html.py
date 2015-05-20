@@ -110,3 +110,11 @@ def logout():
 @html.route("/pending")
 def pending():
     return render_template("pending.html")
+
+@html.route("/download")
+def download():
+    return render_template("download.html")
+
+@html.route("/roadmap")
+def roadmap():
+    return render_template("roadmap.html")

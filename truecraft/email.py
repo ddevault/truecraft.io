@@ -21,7 +21,7 @@ def send_confirmation(user):
     message['X-MC-Important'] = "true"
     message['X-MC-PreserveRecipients'] = "false"
     message['Subject'] = "Confirm your TrueCraft account"
-    message['From'] = "mailer@knightos.org"
+    message['From'] = "mailer@truecraft.io"
     message['To'] = user.email
     smtp.sendmail("mailer@truecraft.io", [ user.email ], message.as_string())
     smtp.quit()
