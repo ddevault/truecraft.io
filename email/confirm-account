@@ -1,0 +1,9 @@
+Hi {{user.username}},
+
+An account was registered with this email address for TrueCraft.
+
+To confirm this account, click this link:
+
+http://{{domain}}/confirm/{{confirmation}}
+
+Otherwise, just ignore the email.
