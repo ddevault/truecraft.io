@@ -185,3 +185,11 @@ def updates():
     posts = BlogPost.query.order_by(desc(BlogPost.created)).offset((page - 1) * 5).limit(5)[:5]
     total = BlogPost.query.count()
     return render_template("updates.html", posts=posts, page=page, total_pages=total // 5)
+
+@html.route("/u/<username>")
+@html.route("/user/<username>")
+def view_user(username):
+    user = User.query.filter(User.username.ilike(username)).first()
+    if not user:
+        abort(404)
+    return render_template("profile.html", profile=user)
