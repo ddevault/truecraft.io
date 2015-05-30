@@ -138,7 +138,27 @@ def compose_blog():
         post.text = content
         db.add(post)
         db.commit()
-        return redirect(url_for("html.view_blog", id=post.id, name=post.title))
+        return redirect(url_for("html.view_blog", id=post.id, title=post.title))
+
+@html.route("/blog/<int:id>/edit", methods=["GET", "POST"])
+@adminrequired
+def edit_blog(id):
+    post = BlogPost.query.filter(BlogPost.id == id).first()
+    if not post:
+        abort(404)
+    if request.method == "GET":
+        return render_template("compose.html", post=post)
+    else:
+        title = request.form.get('post-title')
+        image_url = request.form.get('post-image')
+        content = request.form.get('post-content')
+        if not title or not image_url or not content:
+            return render_template("compose.html", errors=True)
+        post.title = title
+        post.image = image_url
+        post.text = content
+        db.commit()
+        return redirect(url_for("html.view_blog", id=post.id, title=post.title))
 
 @html.route("/blog/<int:id>/<path:title>")
 def view_blog(id, title):
