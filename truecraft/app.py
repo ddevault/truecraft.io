@@ -29,6 +29,7 @@ from truecraft.blueprints.html import html
 app = Flask(__name__)
 app.secret_key = _cfg("secret-key")
 app.jinja_env.cache = None
+app.jinja_env.filters['firstparagraph'] = firstparagraph
 init_db()
 login_manager = LoginManager()
 login_manager.init_app(app)

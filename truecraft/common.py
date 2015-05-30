@@ -10,6 +10,17 @@ import urllib
 import requests
 import xml.etree.ElementTree as ET
 
+def firstparagraph(text):
+    try:
+        para = text.index("\n\n")
+        return text[:para + 2]
+    except:
+        try:
+            para = text.index("\r\n\r\n")
+            return text[:para + 4]
+        except:
+            return text
+
 def with_session(f):
     @wraps(f)
     def go(*args, **kw):

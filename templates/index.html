@@ -23,5 +23,22 @@ can build and explore and fight with your friends. I miss that.
 
 [**Roadmap »**](/roadmap)
 
+# Updates
+
+Some of these screenshots are of the official Minecraft client connecting to a
+TrueCraft server, and some are of the TrueCraft client connecting to a TrueCraft
+server. You can tell the difference by the texture packs - the official assets
+are screenshots of the official Minecraft client.
+
 {% endfilter %}
+
+{% for post in posts %}
+<h3>
+    <a href="{{ url_for("html.view_blog", id=post.id, title=post.title) }}">{{ post.title }}</a>
+    <small>{{ post.created.strftime("%b %d, %Y") }}</small>
+</h3>
+<img src="{{ post.image }}" />
+<p>{{ post.text | firstparagraph }}</p>
+{% endfor %}
+
 {% endblock %}
