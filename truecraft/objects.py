@@ -41,3 +41,19 @@ class User(Base):
         return False
     def get_id(self):
         return self.username
+
+class BlogPost(Base):
+    __tablename__ = 'blog'
+    id = Column(Integer, primary_key = True)
+    title = Column(Unicode(1024))
+    image = Column(Unicode(1024))
+    text = Column(Unicode(65535))
+    created = Column(DateTime)
+    author_id = Column(Integer, ForeignKey('user.id'))
+    author = relationship('User', backref=backref('blog', order_by=id))
+
+    def __init__(self):
+        self.created = datetime.now()
+
+    def __repr__(self):
+        return '<Blog Post %r>' % self.id
