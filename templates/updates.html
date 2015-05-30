@@ -2,6 +2,34 @@
 {% block body %} 
 <h2>TrueCraft Updates</h2>
 
+{% if page != 1 %}
+<div class="text-center">
+    <ul class="pagination">
+        {% if page != 1 %}
+        <li>
+            <a href="/updates?page={{ page - 1 }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        {% for i in range(1, total_pages + 1) %}
+            {% if i == page %}
+            <li class="active"><a href="/updates?page={{ i }}">{{ i }}</a></li>
+            {% else %}
+            <li><a href="/updates?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page != total_pages %}
+        <li>
+            <a href="/updates?page={{ page + 1 }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+
 {% for post in posts %}
 <h3>
     <a href="{{ url_for("html.view_blog", id=post.id, title=post.title) }}">{{ post.title }}</a>

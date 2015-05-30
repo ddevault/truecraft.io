@@ -22,7 +22,8 @@ html = Blueprint('html', __name__, template_folder='../../templates')
 @html.route("/")
 def index():
     posts = BlogPost.query.order_by(desc(BlogPost.created)).limit(5)[:5]
-    return render_template("index.html", posts=posts)
+    total = BlogPost.query.count()
+    return render_template("index.html", posts=posts, total_pages=total // 5)
 
 @html.route("/register", methods=['GET', 'POST'])
 def register():
