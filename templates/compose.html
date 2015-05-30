@@ -23,3 +23,11 @@
     <button type="submit" class="btn btn-success btn-block">Create</button>
 </form>
 {% endblock %}
+{% block scripts %}
+<script>
+(function() {
+    var editor = new Editor();
+    editor.render();
+})();
+</script>
+{% endblock %}
