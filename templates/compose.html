@@ -6,7 +6,11 @@
     <p>All fields are required.</p>
 </div>
 {% endif %}
+{% if post %}
+<form action="{{ url_for("html.edit_blog", id=post.id) }}" method="POST">
+{% else %}
 <form action="/blog/compose" method="POST">
+{% endif %}
     <div class="form-group">
         <label for="post-title">Title</label>
         <input type="text" name="post-title" id="post-title" class="form-control"
