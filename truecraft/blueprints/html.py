@@ -166,3 +166,16 @@ def view_blog(id, title):
     if not post:
         abort(404)
     return render_template("blog-post.html", post=post)
+
+@html.route("/updates")
+def updates():
+    page = 1
+    provided = request.args.get('page')
+    if provided:
+        try:
+            page = int(provided)
+        except:
+            pass
+    posts = BlogPost.query.order_by(desc(BlogPost.created)).offset((page - 1) * 5).limit(5)[:5]
+    total = BlogPost.query.count()
+    return render_template("updates.html", posts=posts, page=page, total_pages=total // 5)
