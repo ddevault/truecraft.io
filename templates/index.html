@@ -41,4 +41,8 @@ are screenshots of the official Minecraft client.
 <p>{{ post.text | firstparagraph }}</p>
 {% endfor %}
 
+{% if user.admin %}
+<a href="/blog/compose">Compose new post</a>
+{% endif %}
+
 {% endblock %}
