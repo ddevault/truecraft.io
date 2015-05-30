@@ -25,6 +25,11 @@ def index():
     total = BlogPost.query.count()
     return render_template("index.html", posts=posts, total_pages=total // 5)
 
+@html.route("/rss.xml")
+def rss():
+    posts = BlogPost.query.order_by(desc(BlogPost.created)).limit(10)[:10]
+    return render_template("rss.xml", posts=posts)
+
 @html.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
