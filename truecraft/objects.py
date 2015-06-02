@@ -17,6 +17,8 @@ class User(Base):
     confirmation = Column(String(128))
     passwordReset = Column(String(128))
     passwordResetExpiry = Column(DateTime)
+    sessionId = Column(String(128))
+    sessionExpiry = Column(DateTime)
 
     def set_password(self, password):
         self.password = bcrypt.hashpw(password, bcrypt.gensalt())

@@ -25,6 +25,7 @@ from truecraft.common import *
 from truecraft.network import *
 
 from truecraft.blueprints.html import html
+from truecraft.blueprints.legacy import legacy
 
 app = Flask(__name__)
 app.secret_key = _cfg("secret-key")
@@ -43,6 +44,7 @@ def load_user(username):
 login_manager.anonymous_user = lambda: None
 
 app.register_blueprint(html)
+app.register_blueprint(legacy)
 
 try:
     locale.setlocale(locale.LC_ALL, 'en_US')
