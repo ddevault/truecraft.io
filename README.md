@@ -13,8 +13,9 @@ Quick overview:
 5. Install pip requirements
 6. Install coffeescript
 7. Configure the site
-8. SQL
-9. Site configuration
+8. Compile static assets
+9. SQL
+10. Site configuration
 
 **Install the dependencies**
 
@@ -88,6 +89,12 @@ Python executable, use `--python=somethingelse` to fix that.
     $ cp config.ini.example config.ini
 
 Edit config.ini and alembic.ini to your liking.
+
+**Compile static assets**
+
+    $ make
+
+Run this again whenever you pull the code.
 
 **Site Configuration**
 
