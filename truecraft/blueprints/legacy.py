@@ -41,6 +41,8 @@ def keep_alive():
     if not username or not sessionId:
         return "Missing username or session parameters"
     user = User.query.filter(User.username.ilike(username)).first()
+    if not user:
+        return "Unknown user"
     if datetime.datetime.utcnow() > user.sessionExpiry:
         return "Session expired."
     if sessionId != user.sessionId:
