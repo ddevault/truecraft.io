@@ -22,6 +22,8 @@ def login():
     if version != "12":
         return "Old Version"
     user = User.query.filter(User.username.ilike(username)).first()
+    if not user:
+        return "Invalid username or password"
     if bcrypt.checkpw(password, user.password):
         salt = os.urandom(40)
         user.sessionId = hashlib.sha256(salt).hexdigest()
