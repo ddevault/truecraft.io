@@ -1,27 +1,17 @@
 {% extends "layout.html" %}
 {% block body %}
+
 {% filter markdown %}
 
 ### Download TrueCraft
 
-TrueCraft is not done. That being said, you're welcome to download the latest
-version if you wish:
+<div class="alert alert-danger"><strong>TrueCraft is not done. These downloads are experimental.</strong></div>
 
-* [Source code (.tar.gz)](https://github.com/SirCmpwn/TrueCraft/tarball/master)
-* [Source code (.zip)](https://github.com/SirCmpwn/TrueCraft/zipball/master)
+[TrueCraft.zip](jenkins.b303.me/job/TrueCraft/lastSuccessfulBuild/artifact/TrueCraft.zip)
+[Source code (.tar.gz)](https://github.com/SirCmpwn/TrueCraft/tarball/master)
+[Source code (.zip)](https://github.com/SirCmpwn/TrueCraft/zipball/master)
 
-Binaries will be available as soon as someone feels like setting up a build
-server.
-
-#### What you get
-
-You'll end up with two important things - the launcher and the server.
-
-Run the launcher to play TrueCraft.
-
-Run the server to host a TrueCraft server for your friends to play on.
-
-TODO: Build server and make the docs here better
+Run `TrueCraft.Launcher.exe` to get started. On Linux or Mac, run `mono TrueCraft.Launcher.exe` instead.
 
 {% endfilter %}
 {% endblock %}
