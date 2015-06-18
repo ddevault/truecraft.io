@@ -1,19 +1,54 @@
 {% extends "layout.html" %}
 {% block body %}
 
-{% filter markdown %}
+<h3>Download TrueCraft</h3>
+<div class="alert alert-danger"><strong>TrueCraft is not done. These downloads are unstable and experimental.</strong></div>
 
-### Download TrueCraft
+<div class="btn-group btn-group-justified" style="margin-bottom: 10px;">
+    <a class="btn btn-success" href="http://jenkins.b303.me/job/TrueCraft/lastSuccessfulBuild/artifact/TrueCraft.zip"><span class="glyphicon glyphicon-save"></span> Download TrueCraft</a>
+    <a class="btn btn-default" href="https://github.com/SirCmpwn/TrueCraft/tarball/master">Source code (.tar.gz)</a>
+    <a class="btn btn-default" href="https://github.com/SirCmpwn/TrueCraft/zipball/master">Source code (.zip)</a>
+</div>
 
-<div class="alert alert-danger"><strong>TrueCraft is not done. These downloads are experimental.</strong></div>
+<h4>Running TrueCraft</h4>
 
-[**Download TrueCraft**](http://jenkins.b303.me/job/TrueCraft/lastSuccessfulBuild/artifact/TrueCraft.zip) &mdash;
-[Source code (.tar.gz)](https://github.com/SirCmpwn/TrueCraft/tarball/master) &mdash;
-[Source code (.zip)](https://github.com/SirCmpwn/TrueCraft/zipball/master)
+<div id="platform-tabs">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#windows" aria-controls="home" role="tab" data-toggle="tab">Windows</a></li>
+        <li role="presentation"><a href="#linux" aria-controls="profile" role="tab" data-toggle="tab">Linux</a></li>
+        <li role="presentation"><a href="#osx" aria-controls="messages" role="tab" data-toggle="tab">OS X</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane well active" id="windows">
+            Extract the archive and double-click <code>TrueCraft.Launcher.exe</code>.
+        </div>
+        <div role="tabpanel" class="tab-pane well" id="linux">
+            <p>Extract the archive and run <code>mono TrueCraft.Launcher.exe</code>.</p>
+            <p>TrueCraft depends on:</p>
+            <ul>
+                <li>mono (<code>mono-complete</code> on Debian/Ubuntu)</li>
+                <li>GTK2 and GTK# (<code>gtksharp</code> on Debian/Ubuntu)</li>
+                <li>webkitgtk2 (<code>webkitgtk</code> on Debian/Ubuntu)</li>
+            </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane well" id="osx">
+            TrueCraft is not currently supported on OS X. If you are a developer and wish to change that,
+            we'd love your <a href="https://github.com/SirCmpwn/TrueCraft">pull request</a>. It should be
+            easy to port, we just need someone with access to OS X to do it.
+        </div>
+    </div>
+</div>
 
-Run `TrueCraft.Launcher.exe` to get started. On Linux or Mac, run `mono TrueCraft.Launcher.exe` instead.
+<p>Thanks to blha303 for hosting <a href="http://jenkins.b303.me/">TrueCraft builds</a>.</p>
 
-Thanks to blha303 for hosting [TrueCraft builds](http://jenkins.b303.me/).
+{% endblock %}
 
-{% endfilter %}
+{% block scripts %}
+<script>
+if (navigator.appVersion.indexOf("Linux") !== -1 || navigator.appVersion.indexOf("X11") !== -1) {
+    $('#platform-tabs a[href="#linux"]').tab("show");
+} else if (navigator.appVersion.indexOf("Mac") !== -1) {
+    $('#platform-tabs a[href="#osx"]').tab("show");
+}
+</script>
 {% endblock %}

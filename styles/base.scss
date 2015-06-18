@@ -146,3 +146,10 @@ input[type="text"] {
         width: 48px;
     }
 }
+
+.tab-pane.well {
+    background: transparent;
+    box-shadow: none;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
