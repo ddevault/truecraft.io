@@ -1,6 +1,8 @@
 # truecraft.io
 
-This software powers the truecraft.io website. It's python+flask+sqlalchemy etc
+This software powers the truecraft.io website. It's python+flask+sqlalchemy etc.
+Report bugs, feature requests, and so on to
+[SirCmpwn/TrueCraft](https://github.com/SirCmpwn/TrueCraft).
 
 ## Running the site
 
