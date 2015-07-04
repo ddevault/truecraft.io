@@ -45,10 +45,13 @@
             {{ feature("Item entities", "done", indent=True) }}
             {{ feature("Falling blocks", "done", indent=True) }}
             {{ feature("Players", "done", indent=True) }}
-            {{ feature("Mobs", "not-started", indent=True) }}
+            {{ feature("Mobs", "in-progress", indent=True) }}
             {{ feature("Minecarts", "not-started", indent=True) }}
             {{ feature("Boats", "not-started", indent=True) }}
-        {{ feature("AI", "not-started") }}
+        {{ feature("AI", "meta") }}
+            {{ feature("Peaceful", "in-progress", indent=True) }}
+            {{ feature("Hostile", "not-started", indent=True) }}
+            {{ feature("Special", "not-started", indent=True) }}
         {{ feature("Terrain generation", "done") }}
             {{ feature("Perlin base terrain", "done", indent=True) }}
             {{ feature("Biomes", "done", indent=True) }}
@@ -58,12 +61,12 @@
             {{ feature("Inventory", "done", indent=True) }}
             {{ feature("Crafting", "done", indent=True) }}
             {{ feature("Furnaces", "not-started", indent=True) }}
-            {{ feature("Chests", "not-started", indent=True) }}
+            {{ feature("Chests", "done", indent=True) }}
         {{ feature("Modding API", "not-started") }}
         {{ feature("Game logic", "meta") }}
             {{ feature("Farming", "in-progress", indent=True, comments="Wheat and sugarcane are done") }}
             {{ feature("Doors", "done", indent=True) }}
-            {{ feature("Unusual item drops", "in-progress", indent=True, comments="For example, snow drops snowballs instead of snow blocks") }}
+            {{ feature("Unusual item drops", "done", indent=True) }}
             {{ feature("Block updates", "done", indent=True) }}
             {{ feature("Fluid simulation", "done", indent=True) }}
             {{ feature("Portals", "not-started", indent=True) }}
@@ -76,8 +79,8 @@
             {{ feature("Fire", "not-started", indent=True) }}
             {{ feature("Jukeboxes", "not-started", indent=True) }}
             {{ feature("Beds", "in-progress", indent=True, comments="Placement is done, sleeping is not") }}
-            {{ feature("Directional blocks", "in-progress", indent=True, comments="Refers to things like ladders and dispensers, that face a certain direction") }}
-        {{ feature("Lighting", "not-started") }}
+            {{ feature("Directional blocks", "done", indent=True) }}
+        {{ feature("Lighting", "done") }}
         {{ feature("Weather", "not-started") }}
         {{ feature("Combat", "not-started") }}
         {{ feature("Food", "not-started") }}
@@ -97,7 +100,7 @@
         {{ feature("Launcher", "in-progress") }}
         {{ feature("Beta 1.7.3 networking", "done") }}
         {{ feature("World decoding", "done") }}
-        {{ feature("Chat", "in-progress") }}
+        {{ feature("Chat", "done") }}
         {{ feature("Window management", "not-started") }}
         {{ feature("World interaction", "not-started") }}
         {{ feature("Combat", "not-started") }}
