@@ -43,6 +43,8 @@ def keep_alive():
     user = User.query.filter(User.username.ilike(username)).first()
     if not user:
         return "Unknown user"
+    if not user.sessionExpiry:
+        return "No established session"
     if datetime.datetime.utcnow() > user.sessionExpiry:
         return "Session expired."
     if sessionId != user.sessionId:
