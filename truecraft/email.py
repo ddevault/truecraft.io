@@ -25,3 +25,24 @@ def send_confirmation(user):
     message['To'] = user.email
     smtp.sendmail("mailer@truecraft.io", [ user.email ], message.as_string())
     smtp.quit()
+
+def send_reset(user):
+    if _cfg("smtp-host") == "":
+        return
+    smtp = smtplib.SMTP(_cfg("smtp-host"), _cfgi("smtp-port"))
+    smtp.login(_cfg("smtp-user"), _cfg("smtp-password"))
+    with open("emails/reset") as f:
+        message = MIMEText(html.parser.HTMLParser().unescape(\
+            pystache.render(f.read(), {
+                'user': user,
+                "domain": _cfg("domain"),
+                "protocol": _cfg("protocol"),
+                'confirmation': user.passwordReset
+            })))
+    message['X-MC-Important'] = "true"
+    message['X-MC-PreserveRecipients'] = "false"
+    message['Subject'] = "Reset your TrueCraft password"
+    message['From'] = "mailer@truecraft.io"
+    message['To'] = user.email
+    smtp.sendmail("mailer@truecraft.io", [ user.email ], message.as_string())
+    smtp.quit()

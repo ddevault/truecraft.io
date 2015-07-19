@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, abort, request, redirect, session, url_for, send_file
 from flask.ext.login import current_user, login_user, logout_user
 from sqlalchemy import desc, or_, and_
+from datetime import datetime, timedelta
 from truecraft.objects import *
 from truecraft.common import *
 from truecraft.config import _cfg
-from truecraft.email import send_confirmation
+from truecraft.email import send_confirmation, send_reset
 
 import binascii
 import os
@@ -113,6 +114,52 @@ def login():
 def logout():
     logout_user()
     return redirect("/")
+
+@html.route("/forgot-password", methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'GET':
+        return render_template("forgot.html")
+    else:
+        email = request.form.get('email')
+        if not email:
+            return render_template("forgot.html", bad_email=True)
+        user = User.query.filter(User.email == email).first()
+        if not user:
+            return render_template("forgot.html", bad_email=True, email=email)
+        user.passwordReset = binascii.b2a_hex(os.urandom(20)).decode("utf-8")
+        user.passwordResetExpiry = datetime.now() + timedelta(days=1)
+        db.commit()
+        send_reset(user)
+        return render_template("forgot.html", success=True)
+
+@html.route("/reset", methods=['GET', 'POST'])
+@html.route("/reset/<username>/<confirmation>", methods=['GET', 'POST'])
+def reset_password(username, confirmation):
+    user = User.query.filter(User.username == username).first()
+    if not user:
+        redirect("/")
+    if request.method == 'GET':
+        if user.passwordResetExpiry == None or user.passwordResetExpiry < datetime.now():
+            return render_template("reset.html", expired=True)
+        if user.passwordReset != confirmation:
+            redirect("/")
+        return render_template("reset.html", username=username, confirmation=confirmation)
+    else:
+        if user.passwordResetExpiry == None or user.passwordResetExpiry < datetime.now():
+            abort(401)
+        if user.passwordReset != confirmation:
+            abort(401)
+        password = request.form.get('password')
+        password2 = request.form.get('password2')
+        if not password or not password2:
+            return render_template("reset.html", username=username, confirmation=confirmation, errors="Please fill out both fields.")
+        if password != password2:
+            return render_template("reset.html", username=username, confirmation=confirmation, errors="You seem to have mistyped one of these, please try again.")
+        user.set_password(password)
+        user.passwordReset = None
+        user.passwordResetExpiry = None
+        db.commit()
+        return redirect("/login?reset=1")
 
 @html.route("/pending")
 def pending():
