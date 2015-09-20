@@ -10,7 +10,11 @@
     {% endif %}
 </h3>
 <h4>Published {{ post.created.strftime("%b %d, %Y") }}</h4>
+{% if post.image.endsWith(".webm") %}
+<video src="{{ post.image }}" autoplay></video>
+{% else %}
 <img src="{{ post.image }}" />
+{% endif %}
 {{ post.text | markdown }}
 <div id="disqus_thread"></div>
 <script type="text/javascript">

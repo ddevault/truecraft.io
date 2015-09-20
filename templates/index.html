@@ -37,7 +37,11 @@ are screenshots of the official Minecraft client.
     <a href="{{ url_for("html.view_blog", id=post.id, title=post.title) }}">{{ post.title }}</a>
     <small>{{ post.created.strftime("%b %d, %Y") }}</small>
 </h3>
+{% if post.image.endsWith(".webm") %}
+<video src="{{ post.image }}" autoplay></video>
+{% else %}
 <img src="{{ post.image }}" />
+{% endif %}
 <p>{{ post.text | firstparagraph | markdown }} <a href="{{ url_for("html.view_blog", id=post.id, title=post.title) }}">Read more »</a></p>
 {% endfor %}
 
