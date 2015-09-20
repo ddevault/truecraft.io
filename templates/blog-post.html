@@ -10,7 +10,7 @@
     {% endif %}
 </h3>
 <h4>Published {{ post.created.strftime("%b %d, %Y") }}</h4>
-{% if post.image.endsWith(".webm") %}
+{% if post.image.endswith(".webm") %}
 <video src="{{ post.image }}" autoplay></video>
 {% else %}
 <img src="{{ post.image }}" />
