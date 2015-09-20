@@ -11,7 +11,7 @@
 </h3>
 <h4>Published {{ post.created.strftime("%b %d, %Y") }}</h4>
 {% if post.image.endswith(".webm") %}
-<video src="{{ post.image }}" autoplay></video>
+<video src="{{ post.image }}" autoplay loop></video>
 {% else %}
 <img src="{{ post.image }}" />
 {% endif %}
