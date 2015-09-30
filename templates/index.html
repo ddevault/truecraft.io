@@ -38,7 +38,9 @@ are screenshots of the official Minecraft client.
     <small>{{ post.created.strftime("%b %d, %Y") }}</small>
 </h3>
 {% if post.image.endswith(".webm") %}
-<video src="{{ post.image }}" autoplay loop></video>
+<video src="{{ post.image.split(' ')[1] }}" autoplay loop>
+    <img src="{{ post.image.split(' ')[0] }}" />
+</video>
 {% else %}
 <img src="{{ post.image }}" />
 {% endif %}

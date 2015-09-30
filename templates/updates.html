@@ -8,7 +8,13 @@
     <a href="{{ url_for("html.view_blog", id=post.id, title=post.title) }}">{{ post.title }}</a>
     <small>{{ post.created.strftime("%b %d, %Y") }}</small>
 </h3>
+{% if post.image.endswith(".webm") %}
+<video src="{{ post.image.split(' ')[1] }}" autoplay loop>
+    <img src="{{ post.image.split(' ')[0] }}" />
+</video>
+{% else %}
 <img src="{{ post.image }}" />
+{% endif %}
 <p>{{ post.text | firstparagraph | markdown }} <a href="{{ url_for("html.view_blog", id=post.id, title=post.title) }}">Read more »</a></p>
 {% endfor %}
 
