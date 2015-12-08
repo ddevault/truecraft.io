@@ -98,5 +98,5 @@ def inject():
         'locale': locale,
         'url_for': url_for,
         'user': current_user,
-        'do_not_track', g.do_not_track
+        'do_not_track': g.do_not_track
     }
