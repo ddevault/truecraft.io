@@ -78,6 +78,15 @@ if not app.debug:
 def handle_404(e):
     return render_template("not_found.html"), 404
 
+@app.before_request
+def find_dnt():
+    field = "Dnt"
+    do_not_track = False
+    if field in request.headers:
+        do_not_track = True if request.headers[field] == "1" else False
+
+    g.do_not_track = do_not_track
+
 @app.context_processor
 def inject():
     return {
@@ -88,5 +97,6 @@ def inject():
         'request': request,
         'locale': locale,
         'url_for': url_for,
-        'user': current_user
+        'user': current_user,
+        'do_not_track', g.do_not_track
     }
