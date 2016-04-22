@@ -14,6 +14,8 @@ def send_confirmation(user):
     if _cfg("smtp-host") == "":
         return
     smtp = smtplib.SMTP(_cfg("smtp-host"), _cfgi("smtp-port"))
+    smtp.ehlo()
+    smtp.starttls()
     smtp.login(_cfg("smtp-user"), _cfg("smtp-password"))
     with open("emails/confirm-account") as f:
         message = MIMEText(html.parser.HTMLParser().unescape(\
@@ -23,13 +25,15 @@ def send_confirmation(user):
     message['Subject'] = "Confirm your TrueCraft account"
     message['From'] = "mailer@truecraft.io"
     message['To'] = user.email
-    smtp.sendmail("mailer@truecraft.io", [ user.email ], message.as_string())
+    smtp.sendmail(_cfg("smtp-user"), [ user.email ], message.as_string())
     smtp.quit()
 
 def send_reset(user):
     if _cfg("smtp-host") == "":
         return
     smtp = smtplib.SMTP(_cfg("smtp-host"), _cfgi("smtp-port"))
+    smtp.ehlo()
+    smtp.starttls()
     smtp.login(_cfg("smtp-user"), _cfg("smtp-password"))
     with open("emails/reset") as f:
         message = MIMEText(html.parser.HTMLParser().unescape(\
@@ -44,5 +48,5 @@ def send_reset(user):
     message['Subject'] = "Reset your TrueCraft password"
     message['From'] = "mailer@truecraft.io"
     message['To'] = user.email
-    smtp.sendmail("mailer@truecraft.io", [ user.email ], message.as_string())
+    smtp.sendmail(_cfg("smtp-user"), [ user.email ], message.as_string())
     smtp.quit()
