@@ -23,7 +23,7 @@ def send_confirmation(user):
     message['X-MC-Important'] = "true"
     message['X-MC-PreserveRecipients'] = "false"
     message['Subject'] = "Confirm your TrueCraft account"
-    message['From'] = "mailer@truecraft.io"
+    message['From'] = _cfg("smtp-user")
     message['To'] = user.email
     smtp.sendmail(_cfg("smtp-user"), [ user.email ], message.as_string())
     smtp.quit()
@@ -46,7 +46,7 @@ def send_reset(user):
     message['X-MC-Important'] = "true"
     message['X-MC-PreserveRecipients'] = "false"
     message['Subject'] = "Reset your TrueCraft password"
-    message['From'] = "mailer@truecraft.io"
+    message['From'] = _cfg("smtp-user")
     message['To'] = user.email
     smtp.sendmail(_cfg("smtp-user"), [ user.email ], message.as_string())
     smtp.quit()
